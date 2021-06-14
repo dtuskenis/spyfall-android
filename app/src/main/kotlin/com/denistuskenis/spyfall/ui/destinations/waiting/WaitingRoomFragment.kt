@@ -1,16 +1,12 @@
 package com.denistuskenis.spyfall.ui.destinations.waiting
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
-import com.denistuskenis.spyfall.R
+import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import kotlinx.coroutines.delay
+import com.denistuskenis.spyfall.databinding.FragmentWaitingBinding as ViewBinding
 
-class WaitingRoomFragment: Fragment(R.layout.fragment_waiting) {
-
-    private val navController: NavController by lazy { findNavController() }
+class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
 
     private var isWaitingOver = false
 

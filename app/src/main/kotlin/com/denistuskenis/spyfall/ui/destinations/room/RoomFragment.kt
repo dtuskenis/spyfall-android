@@ -1,6 +1,6 @@
 package com.denistuskenis.spyfall.ui.destinations.room
 
-import androidx.fragment.app.Fragment
-import com.denistuskenis.spyfall.R
+import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
+import com.denistuskenis.spyfall.databinding.FragmentRoomBinding as ViewBinding
 
-class RoomFragment: Fragment(R.layout.fragment_room)
+class RoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate)

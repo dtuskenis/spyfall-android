@@ -6,12 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-
-private typealias ViewBindingInflater<Binding> = (
-    inflater: LayoutInflater,
-    parent: ViewGroup,
-    attachToParent: Boolean
-) -> Binding
+import com.denistuskenis.spyfall.ui.ViewBindingInflater
 
 class ReusableListAdapter<Data: Any, Binding: ViewBinding>(
     private val bindData: (Data, Binding) -> Unit,

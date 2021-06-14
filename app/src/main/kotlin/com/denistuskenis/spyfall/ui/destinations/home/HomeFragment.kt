@@ -2,18 +2,13 @@ package com.denistuskenis.spyfall.ui.destinations.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.denistuskenis.spyfall.R
-import com.denistuskenis.spyfall.databinding.FragmentHomeBinding
+import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
+import com.denistuskenis.spyfall.databinding.FragmentHomeBinding as ViewBinding
 
-class HomeFragment: Fragment(R.layout.fragment_home) {
+class HomeFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val binding = FragmentHomeBinding.bind(view)
-        val navController = findNavController()
 
         with(binding) {
             createRoomButton.setOnClickListener {

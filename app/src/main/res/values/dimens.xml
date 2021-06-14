@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_medium">16dp</dimen>
+
+    <dimen name="create_room_screen_number_of_players_seek_bar_width">300dp</dimen>
 </resources>

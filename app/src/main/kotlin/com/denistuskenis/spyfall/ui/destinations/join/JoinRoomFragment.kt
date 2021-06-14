@@ -3,6 +3,8 @@ package com.denistuskenis.spyfall.ui.destinations.join
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.denistuskenis.spyfall.R
 import com.denistuskenis.spyfall.databinding.FragmentJoinBinding
 import com.denistuskenis.spyfall.databinding.ItemRoomBinding
@@ -12,10 +14,14 @@ import com.denistuskenis.spyfall.ui.adapter.ReusableListAdapter
 
 class JoinRoomFragment: Fragment(R.layout.fragment_join) {
 
+    private val navController: NavController by lazy { findNavController() }
+
     private val roomsAdapter = ReusableListAdapter(
         bindData = { room: Room, binding ->
             binding.roomNameView.text = room.name
-            binding.root.isClickable = true
+            binding.root.setOnClickListener {
+                navController.navigate(JoinRoomFragmentDirections.toWaitingRoom())
+            }
         },
         inflateBinding = ItemRoomBinding::inflate
     )

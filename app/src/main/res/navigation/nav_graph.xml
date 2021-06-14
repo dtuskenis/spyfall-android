@@ -29,12 +29,44 @@
         android:id="@+id/destination_create_room"
         android:name="com.denistuskenis.spyfall.ui.destinations.create.CreateRoomFragment"
         tools:layout="@layout/fragment_create"
-        />
+        >
+        <action
+            android:id="@+id/to_waiting_room"
+            app:destination="@id/destination_waiting_room"
+            />
+
+    </fragment>
 
     <fragment
         android:id="@+id/destination_join_room"
         android:name="com.denistuskenis.spyfall.ui.destinations.join.JoinRoomFragment"
         tools:layout="@layout/fragment_join"
+        >
+
+        <action
+            android:id="@+id/to_waiting_room"
+            app:destination="@id/destination_waiting_room"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_waiting_room"
+        android:name="com.denistuskenis.spyfall.ui.destinations.waiting.WaitingRoomFragment"
+        tools:layout="@layout/fragment_waiting"
+        >
+
+        <action
+            android:id="@+id/to_room"
+            app:destination="@id/destination_room"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_room"
+        android:name="com.denistuskenis.spyfall.ui.destinations.room.RoomFragment"
+        tools:layout="@layout/fragment_room"
         />
 
 </navigation>

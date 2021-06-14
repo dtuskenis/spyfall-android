@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Spyfall</string>
 
+    <string name="create_room_screen_create_button_title">Create</string>
     <string name="create_room_screen_title">Create Room</string>
 
     <string name="home_screen_create_room_button_title">Create Room</string>
@@ -8,4 +9,8 @@
     <string name="home_screen_title">Home</string>
 
     <string name="join_room_screen_title">Join Room</string>
+
+    <string name="room_screen_title">The Game is in progress</string>
+
+    <string name="waiting_room_screen_title">Waiting for other players</string>
 </resources>

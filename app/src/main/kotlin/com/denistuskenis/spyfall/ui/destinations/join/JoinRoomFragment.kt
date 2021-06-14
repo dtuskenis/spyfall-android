@@ -2,9 +2,10 @@ package com.denistuskenis.spyfall.ui.destinations.join
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.coroutineScope
 import com.denistuskenis.spyfall.databinding.ItemRoomBinding
 import com.denistuskenis.spyfall.model.Room
-import com.denistuskenis.spyfall.model.SAMPLE_ROOMS
+import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.adapter.ReusableListAdapter
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import com.denistuskenis.spyfall.databinding.FragmentJoinBinding as ViewBinding
@@ -28,6 +29,8 @@ class JoinRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) 
             roomsView.adapter = roomsAdapter
         }
 
-        roomsAdapter.submitList(SAMPLE_ROOMS)
+        lifecycle.coroutineScope.launchWhenStarted {
+            RoomsManager.search().also(roomsAdapter::submitList)
+        }
     }
 }

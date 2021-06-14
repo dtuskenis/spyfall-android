@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlinx-serialization'
 
     // Should be applied after android and kotlin plugins
     id 'androidx.navigation.safeargs.kotlin'
@@ -45,12 +46,18 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     implementation "androidx.appcompat:appcompat:1.3.0"
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.core:core-ktx:1.5.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    def fuelVersion = "2.3.1"
+    implementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
+    implementation "com.github.kittinunf.fuel:fuel-coroutines:$fuelVersion"
+    implementation "com.github.kittinunf.fuel:fuel-kotlinx-serialization:$fuelVersion"
 
     implementation "com.google.android.material:material:1.3.0"
 }

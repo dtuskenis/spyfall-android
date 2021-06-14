@@ -1,4 +1,4 @@
-package com.denistuskenis.spyfall.ui.join
+package com.denistuskenis.spyfall.ui.destinations.join
 
 import android.os.Bundle
 import android.view.View

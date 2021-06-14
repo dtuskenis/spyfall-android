@@ -1,4 +1,4 @@
-package com.denistuskenis.spyfall.ui.home
+package com.denistuskenis.spyfall.ui.destinations.home
 
 import android.os.Bundle
 import android.view.View

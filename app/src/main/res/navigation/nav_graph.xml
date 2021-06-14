@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/destination_home"
-        android:name="com.denistuskenis.spyfall.ui.home.HomeFragment"
+        android:name="com.denistuskenis.spyfall.ui.destinations.home.HomeFragment"
         tools:layout="@layout/fragment_home"
         >
 
@@ -27,13 +27,13 @@
 
     <fragment
         android:id="@+id/destination_create_room"
-        android:name="com.denistuskenis.spyfall.ui.create.CreateRoomFragment"
+        android:name="com.denistuskenis.spyfall.ui.destinations.create.CreateRoomFragment"
         tools:layout="@layout/fragment_create"
         />
 
     <fragment
         android:id="@+id/destination_join_room"
-        android:name="com.denistuskenis.spyfall.ui.join.JoinRoomFragment"
+        android:name="com.denistuskenis.spyfall.ui.destinations.join.JoinRoomFragment"
         tools:layout="@layout/fragment_join"
         />
 

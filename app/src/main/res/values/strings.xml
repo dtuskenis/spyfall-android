@@ -2,7 +2,8 @@
     <string name="app_name">Spyfall</string>
 
     <string name="create_room_screen_create_button_title">Create</string>
-    <string name="create_room_screen_number_of_players_format">Number of players: %d</string>
+    <string name="create_room_screen_room_name_hint">Text goes here</string>
+    <string name="create_room_screen_room_name_title">Name for a room</string>
     <string name="create_room_screen_title">Create Room</string>
 
     <string name="home_screen_create_room_button_title">Create Room</string>

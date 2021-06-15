@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -18,24 +17,26 @@
         />
 
     <TextView
-        android:id="@+id/number_of_players_title"
+        android:id="@+id/room_name_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_room_screen_number_of_players_format"
+        android:text="@string/create_room_screen_room_name_title"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/number_of_players_view"
+        app:layout_constraintStart_toStartOf="@id/room_name_view"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3"
-        tools:text="Number of players: 3"
         />
 
-    <SeekBar
-        android:id="@+id/number_of_players_view"
-        android:layout_width="@dimen/create_room_screen_number_of_players_seek_bar_width"
+    <EditText
+        android:id="@+id/room_name_view"
+        android:layout_width="@dimen/create_room_screen_room_name_view_width"
         android:layout_height="wrap_content"
+        android:autofillHints="@null"
+        android:hint="@string/create_room_screen_room_name_hint"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/number_of_players_title"
+        app:layout_constraintTop_toBottomOf="@id/room_name_title"
         />
 
     <Button

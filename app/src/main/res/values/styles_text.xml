@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.Spyfall.Title" parent="TextAppearance.MaterialComponents.Headline5" />
+
+    <style name="TextAppearance.Spyfall.Secondary" parent="TextAppearance.MaterialComponents.Headline6" />
+
+    <style name="TextAppearance.Spyfall.Body" parent="TextAppearance.MaterialComponents.Subtitle1" />
+
+</resources>

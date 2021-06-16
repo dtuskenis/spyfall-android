@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Spyfall.Root.Secondary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -12,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/waiting_room_screen_title"
+        android:textAppearance="@style/TextAppearance.Spyfall.Secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +25,7 @@
         android:id="@+id/player_readiness_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.Spyfall.Body"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
@@ -41,7 +44,7 @@
 
     <Button
         android:id="@+id/ready_button"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/default_button_width"
         android:layout_height="wrap_content"
         android:text="@string/waiting_room_screen_ready_button_title"
         app:layout_constraintBottom_toBottomOf="parent"

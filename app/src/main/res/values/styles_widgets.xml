@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.Spyfall.Button" parent="Widget.MaterialComponents.Button" />
+
+    <style name="Widget.Spyfall.Text" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Widget.Spyfall.TextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColorHint">?attr/colorOnPrimary</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MaterialComponents.LargeComponent</item>
+        <item name="boxStrokeColor">@drawable/color_material_text_input_box_stroke</item>
+    </style>
+
+    <style name="Widget.Spyfall.TextInputEditText" parent="Widget.Design.TextInputLayout">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.Spyfall.Root" parent="">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="Widget.Spyfall.Root.Primary">
+        <item name="android:background">@drawable/background_spyfall_primary</item>
+    </style>
+
+    <style name="Widget.Spyfall.Root.Secondary">
+        <item name="android:background">@drawable/background_spyfall_secondary</item>
+    </style>
+
+</resources>

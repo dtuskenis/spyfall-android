@@ -7,4 +7,8 @@ interface RoomsManager {
     suspend fun create(input: CreateRoomInput): RoomId
 
     suspend fun join(input: JoinRoomInput): JoinRoomResult
+
+    suspend fun check(input: CheckRoomInput): CheckRoomResult
+
+    suspend fun ready(input: ReadyPlayerInput)
 }

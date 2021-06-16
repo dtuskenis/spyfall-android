@@ -1,9 +1,14 @@
 package com.denistuskenis.spyfall.ui.destinations.waiting
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.coroutineScope
+import com.denistuskenis.spyfall.R
+import com.denistuskenis.spyfall.model.RoomState
+import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import com.denistuskenis.spyfall.databinding.FragmentWaitingBinding as ViewBinding
 
 class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
@@ -14,23 +19,45 @@ class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflat
         super.onCreate(savedInstanceState)
 
         lifecycle.coroutineScope.launchWhenStarted {
-            delay(STUB_WAITING_TIME_MILLISECONDS)
-
-            isWaitingOver = true
-
-            navController.navigate(WaitingRoomFragmentDirections.toRoom())
+            while (true) {
+                if (isWaitingOver) {
+                    navController.popBackStack()
+                } else {
+                    RoomsManager.check()?.let { roomState ->
+                        when (roomState) {
+                            is RoomState.Waiting -> {
+                                binding.playerReadinessView.text = getString(
+                                    R.string.waiting_room_screen_players_readiness_format,
+                                    roomState.numberOfReadyPlayers,
+                                    roomState.numberOfPlayers
+                                )
+                            }
+                            is RoomState.GameStarted -> {
+                                isWaitingOver = true
+                                navController.navigate(WaitingRoomFragmentDirections.toRoom())
+                            }
+                        }
+                    } ?: navController.popBackStack()
+                }
+                delay(GAME_STATE_POLLING_INTERVAL_MILLISECONDS)
+            }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        if (isWaitingOver) {
-            navController.popBackStack()
+        with(binding) {
+            readyButton.setOnClickListener {
+                readyButton.isEnabled = false
+                lifecycle.coroutineScope.launch {
+                    RoomsManager.ready()
+                }
+            }
         }
     }
 
     private companion object {
-        const val STUB_WAITING_TIME_MILLISECONDS = 3000L
+        const val GAME_STATE_POLLING_INTERVAL_MILLISECONDS = 500L
     }
 }

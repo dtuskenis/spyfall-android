@@ -1,9 +1,7 @@
 package com.denistuskenis.spyfall.model
 
 import com.denistuskenis.spyfall.backend.Backend
-import com.denistuskenis.spyfall.domain.CreateRoomInput
-import com.denistuskenis.spyfall.domain.JoinRoomInput
-import com.denistuskenis.spyfall.domain.JoinRoomResult
+import com.denistuskenis.spyfall.domain.*
 import java.util.*
 import com.denistuskenis.spyfall.model.Room as AppRoom
 
@@ -35,4 +33,26 @@ object RoomsManager {
         ).let {
             it is JoinRoomResult.Success
         }
+
+    suspend fun check(): RoomState? {
+        return Backend.check(input = CheckRoomInput(playerId))
+            .let {
+                when (it) {
+                    is CheckRoomResult.Waiting -> RoomState.Waiting(
+                        numberOfPlayers = it.numberOfPlayers,
+                        numberOfReadyPlayers = it.numberOfReadyPlayers,
+                    )
+                    is CheckRoomResult.GameStarted.AsSpy -> RoomState.GameStarted.AsSpy
+                    is CheckRoomResult.GameStarted.AsCivil -> RoomState.GameStarted.AsCivil(
+                        role = it.role,
+                        locationName = it.locationName,
+                    )
+                    is CheckRoomResult.PlayerNotInRoom -> null
+                }
+            }
+    }
+
+    suspend fun ready() {
+        Backend.ready(input = ReadyPlayerInput(playerId))
+    }
 }

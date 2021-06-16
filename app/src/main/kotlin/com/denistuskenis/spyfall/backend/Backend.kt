@@ -28,7 +28,8 @@ object Backend: RoomsManager {
     override suspend fun create(input: CreateRoomInput): RoomId {
         return Fuel.post("$API_HOST/create")
             .jsonBody(json.encodeToString(input))
-            .awaitString()
+            .awaitObjectResponseResult<String>(kotlinxDeserializerOf())
+            .let { (_, _, result) -> result.get() }
     }
 
     override suspend fun join(input: JoinRoomInput): JoinRoomResult {
@@ -36,6 +37,19 @@ object Backend: RoomsManager {
             .jsonBody(json.encodeToString(input))
             .awaitObjectResponseResult<JoinRoomResult>(kotlinxDeserializerOf())
             .let { (_, _, result) -> result.get() }
+    }
+
+    override suspend fun check(input: CheckRoomInput): CheckRoomResult {
+        return Fuel.post("$API_HOST/check")
+            .jsonBody(json.encodeToString(input))
+            .awaitObjectResponseResult<CheckRoomResult>(kotlinxDeserializerOf())
+            .let { (_, _, result) -> result.get() }
+    }
+
+    override suspend fun ready(input: ReadyPlayerInput) {
+        Fuel.post("$API_HOST/ready")
+            .jsonBody(json.encodeToString(input))
+            .awaitString()
     }
 
     private const val API_HOST = "https://api-spyfall.herokuapp.com"

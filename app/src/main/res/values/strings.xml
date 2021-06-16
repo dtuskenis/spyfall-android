@@ -12,7 +12,8 @@
 
     <string name="join_room_screen_title">Join Room</string>
 
-    <string name="room_screen_title">The Game is in progress</string>
+    <string name="room_screen_role_civil">You are "%1s" (location is "%2s")</string>
+    <string name="room_screen_role_spy">You are the spy.</string>
 
     <string name="waiting_room_screen_players_readiness_format">%1d of %2d ready</string>
     <string name="waiting_room_screen_ready_button_title">Ready</string>

@@ -67,6 +67,14 @@
         android:id="@+id/destination_room"
         android:name="com.denistuskenis.spyfall.ui.destinations.room.RoomFragment"
         tools:layout="@layout/fragment_room"
-        />
+        >
+
+        <argument
+            android:name="civilRole"
+            app:argType="com.denistuskenis.spyfall.ui.destinations.room.CivilRole"
+            app:nullable="true"
+            />
+
+    </fragment>
 
 </navigation>

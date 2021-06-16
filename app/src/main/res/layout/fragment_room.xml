@@ -8,14 +8,14 @@
     >
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/role_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/room_screen_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="@string/room_screen_role_spy"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

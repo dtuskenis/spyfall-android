@@ -16,15 +16,22 @@ sealed class CheckRoomResult {
     @Serializable
     sealed class GameStarted : CheckRoomResult() {
 
+        abstract val cardBackImagePath: String
+
         @Serializable
         @SerialName("AsSpy")
-        object AsSpy : GameStarted()
+        data class AsSpy(
+            override val cardBackImagePath: String,
+            val cardFrontImagePath: String,
+        ) : GameStarted()
 
         @Serializable
         @SerialName("AsCivil")
         data class AsCivil(
+            override val cardBackImagePath: String,
             val role: String,
             val locationName: String,
+            val locationImagePath: String,
         ) : GameStarted()
     }
 

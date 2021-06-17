@@ -75,6 +75,18 @@
             app:nullable="true"
             />
 
+        <argument
+            android:name="cardBackImageUrl"
+            app:argType="string"
+            app:nullable="false"
+            />
+
+        <argument
+            android:name="cardFrontImageUrl"
+            app:argType="string"
+            app:nullable="false"
+            />
+
     </fragment>
 
 </navigation>

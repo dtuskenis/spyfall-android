@@ -8,18 +8,152 @@
     android:layout_height="match_parent"
     >
 
+    <com.wajahatkarim3.easyflipview.EasyFlipView
+        android:id="@+id/card_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:padding="@dimen/margin_medium"
+        android:visibility="invisible"
+        app:flipDuration="@integer/room_screen_card_flip_animation_duration"
+        app:flipEnabled="true"
+        app:flipOnTouch="false"
+        app:flipType="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,1028:728"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        tools:visibility="visible"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="@dimen/room_screen_card_corner_radius"
+            app:cardElevation="@dimen/room_screen_card_elevation"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:id="@+id/card_front_image_view"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/card_location_name_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_card_title_background"
+                    android:drawablePadding="@dimen/margin_tiny"
+                    android:gravity="center_vertical"
+                    android:minWidth="@dimen/room_screen_card_title_min_width"
+                    android:padding="@dimen/margin_tiny"
+                    app:drawableStartCompat="@drawable/ic_location_pin_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.052197802197802"
+                    tools:text="Столовая"
+                    />
+
+                <TextView
+                    android:id="@+id/card_role_name_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_card_title_background"
+                    android:drawablePadding="@dimen/margin_tiny"
+                    android:gravity="center_vertical"
+                    android:minWidth="@dimen/room_screen_card_title_min_width"
+                    android:padding="@dimen/margin_tiny"
+                    app:drawableStartCompat="@drawable/ic_people_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.945054945054945"
+                    tools:text="Повар"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="@dimen/room_screen_card_corner_radius"
+            app:cardElevation="@dimen/room_screen_card_elevation"
+            >
+
+            <ImageView
+                android:id="@+id/card_back_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+    </com.wajahatkarim3.easyflipview.EasyFlipView>
+
+    <LinearLayout
+        android:id="@+id/loading_indicator_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/card_view"
+        app:layout_constraintEnd_toEndOf="@id/card_view"
+        app:layout_constraintStart_toStartOf="@id/card_view"
+        app:layout_constraintTop_toTopOf="@id/card_view"
+        >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/room_screen_loading_card_title"
+            />
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/role_view"
+        android:id="@+id/card_hint_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
+        android:drawablePadding="@dimen/margin_tiny"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.Spyfall.Title"
+        android:text="@string/room_screen_card_hint"
+        android:textAppearance="@style/TextAppearance.Spyfall.Body"
+        android:visibility="invisible"
+        app:drawableTopCompat="@drawable/ic_hint_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/room_screen_role_spy"
+        app:layout_constraintVertical_bias="0.8"
+        tools:visibility="visible"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

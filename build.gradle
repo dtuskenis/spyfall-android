@@ -23,6 +23,10 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+
+        // Needed for the following dependencies:
+        // com.wajahatkarim3.EasyFlipView:EasyFlipView
+        jcenter()
     }
 }
 

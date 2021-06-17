@@ -1,9 +1,12 @@
 package com.denistuskenis.spyfall.ui.destinations.room
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
-import com.denistuskenis.spyfall.R
+import coil.imageLoader
+import coil.request.ImageRequest
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import com.denistuskenis.spyfall.databinding.FragmentRoomBinding as ViewBinding
 
@@ -14,14 +17,41 @@ class RoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val civilRole = args.civilRole
+        with(binding) {
+            val civilRole = args.civilRole
 
-        binding.roleView.text = if (civilRole != null) {
-            getString(
-                R.string.room_screen_role_civil,
-                civilRole.role,
-                civilRole.locationName
-            )
-        } else getString(R.string.room_screen_role_spy)
+            cardLocationNameView.text = civilRole?.locationName
+            cardLocationNameView.isVisible = civilRole != null
+            cardRoleNameView.text = civilRole?.role
+            cardRoleNameView.isVisible = civilRole != null
+
+            cardView.setOnClickListener {
+                cardView.flipTheView()
+                cardHintView.isVisible = false
+            }
+
+            loadImage(imageUrl = args.cardBackImageUrl) { cardBackImage ->
+                cardBackImageView.setImageDrawable(cardBackImage)
+
+                loadImage(imageUrl = args.cardFrontImageUrl) { cardFrontImage ->
+                    cardFrontImageView.setImageDrawable(cardFrontImage)
+                    loadingIndicatorView.isVisible = false
+                    cardView.isVisible = true
+                    cardHintView.isVisible = true
+                }
+            }
+        }
+    }
+
+    private fun loadImage(imageUrl: String, onSuccess: (Drawable) -> Unit) {
+        val context = requireContext()
+
+        val request = ImageRequest.Builder(context)
+            .data(imageUrl)
+            .lifecycle(lifecycle)
+            .target(onSuccess = onSuccess)
+            .build()
+
+        context.imageLoader.enqueue(request)
     }
 }

@@ -42,10 +42,15 @@ object RoomsManager {
                         numberOfPlayers = it.numberOfPlayers,
                         numberOfReadyPlayers = it.numberOfReadyPlayers,
                     )
-                    is CheckRoomResult.GameStarted.AsSpy -> RoomState.GameStarted.AsSpy
+                    is CheckRoomResult.GameStarted.AsSpy -> RoomState.GameStarted.AsSpy(
+                        cardBackImageUrl = "${Backend.API_HOST}${it.cardBackImagePath}",
+                        cardFrontImageUrl = "${Backend.API_HOST}${it.cardFrontImagePath}",
+                    )
                     is CheckRoomResult.GameStarted.AsCivil -> RoomState.GameStarted.AsCivil(
+                        cardBackImageUrl = "${Backend.API_HOST}${it.cardBackImagePath}",
                         role = it.role,
                         locationName = it.locationName,
+                        locationImageUrl = "${Backend.API_HOST}${it.locationImagePath}",
                     )
                     is CheckRoomResult.PlayerNotInRoom -> null
                 }

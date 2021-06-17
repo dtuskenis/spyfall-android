@@ -41,6 +41,11 @@ class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflat
                                             role = it.role,
                                             locationName = it.locationName,
                                         )
+                                    },
+                                    cardBackImageUrl = roomState.cardBackImageUrl,
+                                    cardFrontImageUrl = when (roomState) {
+                                        is RoomState.GameStarted.AsSpy -> roomState.cardFrontImageUrl
+                                        is RoomState.GameStarted.AsCivil -> roomState.locationImageUrl
                                     }
                                 ))
                             }

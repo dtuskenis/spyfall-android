@@ -9,11 +9,18 @@ sealed class RoomState {
 
     sealed class GameStarted : RoomState() {
 
-        object AsSpy : GameStarted()
+        abstract val cardBackImageUrl: String
+
+        data class AsSpy(
+            override val cardBackImageUrl: String,
+            val cardFrontImageUrl: String,
+        ) : GameStarted()
 
         data class AsCivil(
+            override val cardBackImageUrl: String,
             val role: String,
             val locationName: String,
+            val locationImageUrl: String,
         ) : GameStarted()
     }
 }

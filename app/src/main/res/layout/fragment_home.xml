@@ -12,11 +12,9 @@
         android:layout_width="@dimen/default_button_width"
         android:layout_height="wrap_content"
         android:text="@string/home_screen_create_room_button_title"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/join_room_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75"
         />
 
     <Button
@@ -24,9 +22,9 @@
         android:layout_width="@dimen/default_button_width"
         android:layout_height="wrap_content"
         android:text="@string/home_screen_join_room_button_title"
+        app:layout_constraintBottom_toTopOf="@id/locations_reference_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/create_room_button"
         />
 
     <Button
@@ -34,10 +32,11 @@
         style="@style/Widget.Spyfall.Button.Secondary"
         android:layout_width="@dimen/default_button_width"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_medium"
         android:text="@string/home_screen_locations_reference_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/join_room_button"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

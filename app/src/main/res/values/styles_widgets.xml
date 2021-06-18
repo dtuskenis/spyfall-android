@@ -16,6 +16,8 @@
         <item name="android:textColorHint">?attr/colorOnPrimary</item>
         <item name="shapeAppearance">@style/ShapeAppearance.MaterialComponents.LargeComponent</item>
         <item name="boxStrokeColor">@drawable/color_material_text_input_box_stroke</item>
+        <item name="counterTextColor">?attr/colorOnPrimary</item>
+        <item name="endIconTint">?attr/colorOnPrimary</item>
     </style>
 
     <style name="Widget.Spyfall.TextInputEditText" parent="Widget.Design.TextInputLayout">

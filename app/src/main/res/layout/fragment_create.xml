@@ -23,6 +23,10 @@
         android:layout_width="@dimen/create_room_screen_room_name_view_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/create_room_screen_room_name_top_margin"
+        app:counterEnabled="true"
+        app:counterMaxLength="@integer/create_room_screen_room_name_view_max_length"
+        app:endIconDrawable="@drawable/ic_clear_24dp"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
@@ -34,6 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/create_room_screen_room_name_hint"
+            android:maxLength="@integer/create_room_screen_room_name_view_max_length"
+            android:singleLine="true"
             />
 
     </com.google.android.material.textfield.TextInputLayout>

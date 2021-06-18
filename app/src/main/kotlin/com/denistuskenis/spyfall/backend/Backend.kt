@@ -17,12 +17,7 @@ object Backend: RoomsManager {
     override suspend fun search(): List<Room> {
         return Fuel.get("$API_HOST/search")
             .awaitObjectResponseResult(kotlinxDeserializerOf(ListSerializer(Room.serializer())))
-            .let { (_, _, result) ->
-                result.fold(
-                    success = { it },
-                    failure = { emptyList() }
-                )
-            }
+            .let { (_, _, result) -> result.get() }
     }
 
     override suspend fun create(input: CreateRoomInput): RoomId {

@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import com.denistuskenis.spyfall.R
 import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
+import com.denistuskenis.spyfall.ui.errors.handleWithDefaultErrorHandler
 import kotlinx.coroutines.launch
 import com.denistuskenis.spyfall.databinding.FragmentCreateBinding as ViewBinding
 
@@ -18,8 +19,12 @@ class CreateRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate
             createButton.setOnClickListener {
                 validateRoomName { roomName ->
                     lifecycleScope.launch {
-                        RoomsManager.create(roomName = roomName)
-                        navController.navigate(CreateRoomFragmentDirections.toWaitingRoom())
+                        handleWithDefaultErrorHandler(
+                            result = RoomsManager.create(roomName = roomName),
+                            onSuccess = {
+                                navController.navigate(CreateRoomFragmentDirections.toWaitingRoom())
+                            }
+                        )
                     }
                 }
             }

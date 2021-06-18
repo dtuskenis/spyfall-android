@@ -2,6 +2,10 @@ package com.denistuskenis.spyfall.model
 
 import com.denistuskenis.spyfall.backend.Backend
 import com.denistuskenis.spyfall.domain.*
+import com.denistuskenis.spyfall.functional.Result
+import com.denistuskenis.spyfall.functional.Success
+import com.denistuskenis.spyfall.functional.UnknownError
+import java.lang.Exception
 import java.util.*
 import com.denistuskenis.spyfall.model.GameLocation as AppGameLocation
 import com.denistuskenis.spyfall.model.Room as AppRoom
@@ -10,22 +14,26 @@ object RoomsManager {
 
     private val playerId = UUID.randomUUID().toString()
 
-    suspend fun search(): List<AppRoom> =
+    suspend fun search(): Result<UnknownError, List<AppRoom>> = wrapExceptions {
         Backend.search().map {
             AppRoom(
                 id = it.id,
                 name = it.name,
             )
         }
+    }
 
-    suspend fun create(roomName: String) =
+    suspend fun create(roomName: String): Result<UnknownError, Success> = wrapExceptions {
         Backend.create(
             input = CreateRoomInput(
                 roomName = roomName
             )
-        ).also { join(it) }
+        ).also {
+            join(it)
+        }.let { Success }
+    }
 
-    suspend fun join(roomId: String): Boolean =
+    suspend fun join(roomId: String): Result<UnknownError, Boolean> = wrapExceptions {
         Backend.join(
             input = JoinRoomInput(
                 roomId = roomId,
@@ -34,9 +42,10 @@ object RoomsManager {
         ).let {
             it is JoinRoomResult.Success
         }
+    }
 
-    suspend fun check(): RoomState? {
-        return Backend.check(input = CheckRoomInput(playerId))
+    suspend fun check(): Result<UnknownError, RoomState?> = wrapExceptions {
+        Backend.check(input = CheckRoomInput(playerId))
             .let {
                 when (it) {
                     is CheckRoomResult.Waiting -> RoomState.Waiting(
@@ -58,16 +67,25 @@ object RoomsManager {
             }
     }
 
-    suspend fun ready() {
-        Backend.ready(input = ReadyPlayerInput(playerId))
+    suspend fun ready(): Result<UnknownError, Success> = wrapExceptions {
+        Backend.ready(input = ReadyPlayerInput(playerId)).let { Success }
     }
 
-    suspend fun locations(): List<AppGameLocation> {
-        return Backend.locations().map {
+    suspend fun locations(): Result<UnknownError, List<AppGameLocation>> = wrapExceptions {
+        Backend.locations().map {
             AppGameLocation(
                 name = it.name,
                 imageUrl = "${Backend.API_HOST}${it.imagePath}",
             )
+        }
+    }
+
+    private inline fun <Data> wrapExceptions(getData: () -> Data): Result<UnknownError, Data> {
+        try {
+            return Result.Success(getData())
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+            return Result.Error(UnknownError)
         }
     }
 }

@@ -2,12 +2,13 @@ package com.denistuskenis.spyfall.ui.destinations.join
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import com.denistuskenis.spyfall.databinding.ItemRoomBinding
 import com.denistuskenis.spyfall.model.Room
 import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.adapter.ReusableListAdapter
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
+import com.denistuskenis.spyfall.ui.errors.handleWithDefaultErrorHandler
 import kotlinx.coroutines.launch
 import com.denistuskenis.spyfall.databinding.FragmentJoinBinding as ViewBinding
 
@@ -17,24 +18,35 @@ class JoinRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) 
         bindData = { room: Room, binding ->
             binding.roomNameView.text = room.name
             binding.root.setOnClickListener {
-                lifecycle.coroutineScope.launch {
-                    RoomsManager.join(room.id)
-                    navController.navigate(JoinRoomFragmentDirections.toWaitingRoom())
+                lifecycleScope.launch {
+                    handleWithDefaultErrorHandler(
+                        result = RoomsManager.join(room.id),
+                        onSuccess = {
+                            navController.navigate(JoinRoomFragmentDirections.toWaitingRoom())
+                        }
+                    )
                 }
             }
         },
         inflateBinding = ItemRoomBinding::inflate
     )
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        lifecycleScope.launchWhenStarted {
+            handleWithDefaultErrorHandler(
+                result = RoomsManager.search(),
+                onSuccess = roomsAdapter::submitList,
+            )
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
             roomsView.adapter = roomsAdapter
-        }
-
-        lifecycle.coroutineScope.launchWhenStarted {
-            RoomsManager.search().also(roomsAdapter::submitList)
         }
     }
 }

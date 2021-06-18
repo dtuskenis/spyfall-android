@@ -11,6 +11,7 @@ import com.denistuskenis.spyfall.model.GameLocation
 import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.adapter.ReusableListAdapter
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
+import com.denistuskenis.spyfall.ui.errors.handleWithDefaultErrorHandler
 import kotlinx.coroutines.launch
 import com.denistuskenis.spyfall.databinding.FragmentLocationsBinding as ViewBinding
 
@@ -39,7 +40,10 @@ class LocationReferenceFragment : DestinationFragment<ViewBinding>(ViewBinding::
         super.onStart()
 
         lifecycleScope.launch {
-            RoomsManager.locations().also(locationsAdapter::submitList)
+            handleWithDefaultErrorHandler(
+                result = RoomsManager.locations(),
+                onSuccess = locationsAdapter::submitList,
+            )
         }
     }
 

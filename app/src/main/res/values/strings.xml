@@ -6,6 +6,10 @@
     <string name="create_room_screen_room_name_hint">Name for a room</string>
     <string name="create_room_screen_title">Create Room</string>
 
+    <string name="default_error_dialog_button">OK</string>
+    <string name="default_error_dialog_message">Please check your network connection or try again later.</string>
+    <string name="default_error_dialog_title">Something went wrong</string>
+
     <string name="home_screen_create_room_button_title">Create Room</string>
     <string name="home_screen_join_room_button_title">Join Room</string>
     <string name="home_screen_locations_reference_button">Locations Reference</string>

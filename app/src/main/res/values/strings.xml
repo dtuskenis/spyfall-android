@@ -7,8 +7,11 @@
 
     <string name="home_screen_create_room_button_title">Create Room</string>
     <string name="home_screen_join_room_button_title">Join Room</string>
+    <string name="home_screen_locations_reference_button">Locations Reference</string>
 
     <string name="join_room_screen_title">Join Room</string>
+
+    <string name="locations_reference_screen_title">Locations Reference</string>
 
     <string name="room_screen_card_hint">Tap on card to reveal your role and/or location.\nYou can tap it again to flip it\'s sides</string>
     <string name="room_screen_loading_card_title">Loading card…</string>

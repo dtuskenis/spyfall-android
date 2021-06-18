@@ -17,6 +17,9 @@ class HomeFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
             joinRoomButton.setOnClickListener {
                 navController.navigate(HomeFragmentDirections.toJoinRoom())
             }
+            locationsReferenceButton.setOnClickListener {
+                navController.navigate(HomeFragmentDirections.toLocationsReference())
+            }
         }
     }
 }

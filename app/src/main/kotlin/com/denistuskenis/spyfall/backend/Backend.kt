@@ -52,5 +52,11 @@ object Backend: RoomsManager {
             .awaitString()
     }
 
-    private const val API_HOST = "https://api-spyfall.herokuapp.com"
+    override suspend fun locations(): List<GameLocation> {
+        return Fuel.get("$API_HOST/locations")
+            .awaitObjectResponseResult(kotlinxDeserializerOf(ListSerializer(GameLocation.serializer())))
+            .let { (_, _, result) -> result.get() }
+    }
+
+    const val API_HOST = "https://api-spyfall.herokuapp.com"
 }

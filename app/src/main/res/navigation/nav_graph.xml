@@ -23,6 +23,11 @@
             app:destination="@id/destination_create_room"
             />
 
+        <action
+            android:id="@+id/to_locations_reference"
+            app:destination="@id/destination_locations"
+            />
+
     </fragment>
 
     <fragment
@@ -87,6 +92,17 @@
             app:nullable="false"
             />
 
+        <action
+            android:id="@+id/to_locations_reference"
+            app:destination="@id/destination_locations"
+            />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/destination_locations"
+        android:name="com.denistuskenis.spyfall.ui.destinations.locations.LocationReferenceFragment"
+        tools:layout="@layout/fragment_locations"
+        />
 
 </navigation>

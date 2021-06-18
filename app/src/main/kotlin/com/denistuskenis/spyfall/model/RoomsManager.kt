@@ -3,6 +3,7 @@ package com.denistuskenis.spyfall.model
 import com.denistuskenis.spyfall.backend.Backend
 import com.denistuskenis.spyfall.domain.*
 import java.util.*
+import com.denistuskenis.spyfall.model.GameLocation as AppGameLocation
 import com.denistuskenis.spyfall.model.Room as AppRoom
 
 object RoomsManager {
@@ -59,5 +60,14 @@ object RoomsManager {
 
     suspend fun ready() {
         Backend.ready(input = ReadyPlayerInput(playerId))
+    }
+
+    suspend fun locations(): List<AppGameLocation> {
+        return Backend.locations().map {
+            AppGameLocation(
+                name = it.name,
+                imageUrl = "${Backend.API_HOST}${it.imagePath}",
+            )
+        }
     }
 }

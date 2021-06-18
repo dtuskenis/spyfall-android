@@ -1,13 +1,12 @@
 package com.denistuskenis.spyfall.ui.destinations.room
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
-import coil.imageLoader
-import coil.request.ImageRequest
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
+import com.denistuskenis.spyfall.ui.loadImage
 import com.denistuskenis.spyfall.databinding.FragmentRoomBinding as ViewBinding
 
 class RoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
@@ -40,18 +39,11 @@ class RoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
                     cardHintView.isVisible = true
                 }
             }
+
+            locationsReferenceButton.isInvisible = civilRole != null
+            locationsReferenceButton.setOnClickListener {
+                navController.navigate(RoomFragmentDirections.toLocationsReference())
+            }
         }
-    }
-
-    private fun loadImage(imageUrl: String, onSuccess: (Drawable) -> Unit) {
-        val context = requireContext()
-
-        val request = ImageRequest.Builder(context)
-            .data(imageUrl)
-            .lifecycle(lifecycle)
-            .target(onSuccess = onSuccess)
-            .build()
-
-        context.imageLoader.enqueue(request)
     }
 }

@@ -11,4 +11,6 @@ interface RoomsManager {
     suspend fun check(input: CheckRoomInput): CheckRoomResult
 
     suspend fun ready(input: ReadyPlayerInput)
+
+    suspend fun locations(): List<GameLocation>
 }

@@ -149,11 +149,23 @@
         android:visibility="invisible"
         app:drawableTopCompat="@drawable/ic_hint_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/locations_reference_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible"
+        />
+
+    <Button
+        android:id="@+id/locations_reference_button"
+        style="@style/Widget.Spyfall.Button.Secondary"
+        android:layout_width="@dimen/default_button_width"
+        android:layout_height="wrap_content"
+        android:text="@string/home_screen_locations_reference_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8"
-        tools:visibility="visible"
+        app:layout_constraintVertical_bias="0.9"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

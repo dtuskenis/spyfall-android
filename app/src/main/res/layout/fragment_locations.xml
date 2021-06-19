@@ -6,6 +6,7 @@
     style="@style/Widget.Spyfall.Root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@drawable/background_spyfall_darkened"
     >
 
     <TextView

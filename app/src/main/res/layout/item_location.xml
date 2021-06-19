@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/margin_tiny"
+    tools:showIn="@layout/fragment_locations"
     >
 
     <View

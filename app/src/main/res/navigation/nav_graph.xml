@@ -16,16 +16,28 @@
         <action
             android:id="@+id/to_join_room"
             app:destination="@id/destination_join_room"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             />
 
         <action
             android:id="@+id/to_create_room"
             app:destination="@id/destination_create_room"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             />
 
         <action
             android:id="@+id/to_locations_reference"
             app:destination="@id/destination_locations"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             />
 
         <action
@@ -43,6 +55,10 @@
         <action
             android:id="@+id/to_waiting_room"
             app:destination="@id/destination_waiting_room"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             />
 
     </fragment>
@@ -56,6 +72,10 @@
         <action
             android:id="@+id/to_waiting_room"
             app:destination="@id/destination_waiting_room"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             />
 
     </fragment>
@@ -69,6 +89,10 @@
         <action
             android:id="@+id/to_room"
             app:destination="@id/destination_room"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             />
 
     </fragment>
@@ -100,6 +124,10 @@
         <action
             android:id="@+id/to_locations_reference"
             app:destination="@id/destination_locations"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             />
 
         <action

@@ -31,22 +31,27 @@ class JoinRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) 
         inflateBinding = ItemRoomBinding::inflate
     )
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        lifecycleScope.launchWhenStarted {
-            handleWithDefaultErrorHandler(
-                result = RoomsManager.search(),
-                onSuccess = roomsAdapter::submitList,
-            )
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+            refreshButton.setOnClickListener { refresh() }
             roomsView.adapter = roomsAdapter
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        refresh()
+    }
+
+    private fun refresh() {
+        lifecycleScope.launch {
+            handleWithDefaultErrorHandler(
+                result = RoomsManager.search(),
+                onSuccess = roomsAdapter::submitList,
+            )
         }
     }
 }

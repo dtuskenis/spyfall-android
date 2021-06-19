@@ -40,9 +40,12 @@ class RoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
                 }
             }
 
-            locationsReferenceButton.isInvisible = civilRole != null
+            locationsReferenceButton.isVisible = civilRole == null
             locationsReferenceButton.setOnClickListener {
                 navController.navigate(RoomFragmentDirections.toLocationsReference())
+            }
+            gameRulesButton.setOnClickListener {
+                navController.navigate(RoomFragmentDirections.toGameRules())
             }
         }
     }

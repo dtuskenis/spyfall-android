@@ -20,6 +20,9 @@ class HomeFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
             locationsReferenceButton.setOnClickListener {
                 navController.navigate(HomeFragmentDirections.toLocationsReference())
             }
+            gameRulesButton.setOnClickListener {
+                navController.navigate(HomeFragmentDirections.toGameRules())
+            }
         }
     }
 }

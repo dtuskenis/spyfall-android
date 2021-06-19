@@ -160,8 +160,20 @@
         style="@style/Widget.Spyfall.Button.Secondary"
         android:layout_width="@dimen/default_button_width"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_medium"
         android:text="@string/home_screen_locations_reference_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/game_rules_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <Button
+        android:id="@+id/game_rules_button"
+        style="@style/Widget.Spyfall.Button.Secondary"
+        android:layout_width="@dimen/default_button_width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:text="@string/home_screen_game_rules_button_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -11,6 +11,7 @@
     <string name="default_error_dialog_title">Something went wrong</string>
 
     <string name="home_screen_create_room_button_title">Create Room</string>
+    <string name="home_screen_game_rules_button_title">Game Rules</string>
     <string name="home_screen_join_room_button_title">Join Room</string>
     <string name="home_screen_locations_reference_button">Locations Reference</string>
 

@@ -28,6 +28,11 @@
             app:destination="@id/destination_locations"
             />
 
+        <action
+            android:id="@+id/to_game_rules"
+            app:destination="@id/destination_game_rules"
+            />
+
     </fragment>
 
     <fragment
@@ -97,12 +102,23 @@
             app:destination="@id/destination_locations"
             />
 
+        <action
+            android:id="@+id/to_game_rules"
+            app:destination="@id/destination_game_rules"
+            />
+
     </fragment>
 
     <fragment
         android:id="@+id/destination_locations"
         android:name="com.denistuskenis.spyfall.ui.destinations.locations.LocationReferenceFragment"
         tools:layout="@layout/fragment_locations"
+        />
+
+    <activity
+        android:id="@+id/destination_game_rules"
+        app:action="android.intent.action.VIEW"
+        app:data="@string/game_rules_link"
         />
 
 </navigation>

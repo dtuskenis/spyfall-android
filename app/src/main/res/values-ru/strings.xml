@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Находка для шпиона</string>
+
+    <string name="create_room_screen_create_button_title">Создать</string>
+    <string name="create_room_screen_empty_room_name_error">Название комнаты должно быть непустым</string>
+    <string name="create_room_screen_room_name_hint">Название комнаты</string>
+    <string name="create_room_screen_title">Создать Комнату</string>
+
+    <string name="default_error_dialog_button">ОК</string>
+    <string name="default_error_dialog_message">Проверьте соединение с сетью или попробуйте снова.</string>
+    <string name="default_error_dialog_title">Что-то пошло не так</string>
+
+    <string name="home_screen_create_room_button_title">Создать Комнату</string>
+    <string name="home_screen_game_rules_button_title">Правила Игры</string>
+    <string name="home_screen_join_room_button_title">Войти в Комнату</string>
+    <string name="home_screen_locations_reference_button">Игровые Локации</string>
+
+    <string name="join_room_screen_title">Войти в Комнату</string>
+
+    <string name="locations_reference_screen_title">Игровые Локации</string>
+
+    <string name="room_screen_card_hint">Нажмите на карту, чтобы узнать свою роль и/или локацию.\nВы можете нажать на карту снова, чтобы ее перевернуть</string>
+    <string name="room_screen_loading_card_title">Загрузка карты…</string>
+
+    <string name="waiting_room_screen_players_readiness_format">%1d из %2d готовы</string>
+    <string name="waiting_room_screen_ready_button_title">Подтвердить готовность</string>
+    <string name="waiting_room_screen_title">Ожидание готовности всех игроков</string>
+</resources>

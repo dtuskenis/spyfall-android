@@ -1,18 +1,18 @@
 package com.denistuskenis.spyfall.model
 
+import com.denistuskenis.spyfall.AppActivity
 import com.denistuskenis.spyfall.backend.Backend
 import com.denistuskenis.spyfall.domain.*
 import com.denistuskenis.spyfall.functional.Result
 import com.denistuskenis.spyfall.functional.Success
 import com.denistuskenis.spyfall.functional.UnknownError
 import java.lang.Exception
-import java.util.*
 import com.denistuskenis.spyfall.model.GameLocation as AppGameLocation
 import com.denistuskenis.spyfall.model.Room as AppRoom
 
 object RoomsManager {
 
-    private val playerId = UUID.randomUUID().toString()
+    private val playerId get() = AppActivity.PLAYER_ID_PROVIDER.playerId
 
     suspend fun search(): Result<UnknownError, List<AppRoom>> = wrapExceptions {
         Backend.search().map {

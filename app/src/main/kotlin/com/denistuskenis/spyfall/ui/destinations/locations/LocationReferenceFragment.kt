@@ -21,7 +21,9 @@ class LocationReferenceFragment : DestinationFragment<ViewBinding>(ViewBinding::
         bindData = { location: GameLocation, binding ->
             with(binding) {
                 locationNameView.text = location.name
-                locationImageView.load(location.imageUrl)
+                locationImageView.load(location.imageUrl) {
+                    crossfade(true)
+                }
             }
         },
         inflateBinding = ItemLocationBinding::inflate

@@ -23,5 +23,6 @@
         <item name="android:textViewStyle">@style/Widget.Spyfall.Text</item>
         <item name="materialButtonStyle">@style/Widget.Spyfall.Button</item>
         <item name="textInputStyle">@style/Widget.Spyfall.TextInput</item>
+        <item name="circularProgressIndicatorStyle">@style/Widget.Spyfall.ProgressIndicator</item>
     </style>
 </resources>

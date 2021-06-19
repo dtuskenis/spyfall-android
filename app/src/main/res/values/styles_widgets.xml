@@ -27,4 +27,14 @@
         <item name="android:paddingEnd">0dp</item>
     </style>
 
+    <style name="Widget.Spyfall.ProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
+        <item name="android:indeterminate">true</item>
+        <item name="indicatorColor">?attr/colorSecondary</item>
+        <item name="trackThickness">2dp</item>
+    </style>
+
+    <style name="Widget.Spyfall.ProgressIndicator.Small">
+        <item name="indicatorSize">20dp</item>
+    </style>
+
 </resources>

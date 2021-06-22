@@ -1,22 +1,21 @@
 package com.denistuskenis.spyfall.model
 
 import com.denistuskenis.spyfall.AppActivity
-import com.denistuskenis.spyfall.backend.Backend
+import com.denistuskenis.spyfall.backend.RemoteRoomsManager
 import com.denistuskenis.spyfall.domain.*
 import com.denistuskenis.spyfall.functional.Result
 import com.denistuskenis.spyfall.functional.Success
 import com.denistuskenis.spyfall.functional.UnknownError
 import java.lang.Exception
 import com.denistuskenis.spyfall.model.GameLocation as AppGameLocation
-import com.denistuskenis.spyfall.model.Room as AppRoom
 
 object RoomsManager {
 
     private val playerId get() = AppActivity.PLAYER_ID_PROVIDER.playerId
 
-    suspend fun search(): Result<UnknownError, List<AppRoom>> = wrapExceptions {
-        Backend.search().map {
-            AppRoom(
+    suspend fun search(): Result<UnknownError, List<Room>> = wrapExceptions {
+        RemoteRoomsManager.search().map {
+            Room(
                 id = it.id,
                 name = it.name,
             )
@@ -24,7 +23,7 @@ object RoomsManager {
     }
 
     suspend fun create(roomName: String): Result<UnknownError, Success> = wrapExceptions {
-        Backend.create(
+        RemoteRoomsManager.create(
             input = CreateRoomInput(
                 roomName = roomName
             )
@@ -34,7 +33,7 @@ object RoomsManager {
     }
 
     suspend fun join(roomId: String): Result<UnknownError, Boolean> = wrapExceptions {
-        Backend.join(
+        RemoteRoomsManager.join(
             input = JoinRoomInput(
                 roomId = roomId,
                 playerId = playerId,
@@ -45,7 +44,7 @@ object RoomsManager {
     }
 
     suspend fun check(): Result<UnknownError, RoomState?> = wrapExceptions {
-        Backend.check(input = CheckRoomInput(playerId))
+        RemoteRoomsManager.check(input = CheckRoomInput(playerId))
             .let {
                 when (it) {
                     is CheckRoomResult.Waiting -> RoomState.Waiting(
@@ -53,14 +52,14 @@ object RoomsManager {
                         numberOfReadyPlayers = it.numberOfReadyPlayers,
                     )
                     is CheckRoomResult.GameStarted.AsSpy -> RoomState.GameStarted.AsSpy(
-                        cardBackImageUrl = "${Backend.API_HOST}${it.cardBackImagePath}",
-                        cardFrontImageUrl = "${Backend.API_HOST}${it.cardFrontImagePath}",
+                        cardBackImageUrl = "${RemoteRoomsManager.API_HOST}${it.cardBackImagePath}",
+                        cardFrontImageUrl = "${RemoteRoomsManager.API_HOST}${it.cardFrontImagePath}",
                     )
                     is CheckRoomResult.GameStarted.AsCivil -> RoomState.GameStarted.AsCivil(
-                        cardBackImageUrl = "${Backend.API_HOST}${it.cardBackImagePath}",
+                        cardBackImageUrl = "${RemoteRoomsManager.API_HOST}${it.cardBackImagePath}",
                         role = it.role,
                         locationName = it.locationName,
-                        locationImageUrl = "${Backend.API_HOST}${it.locationImagePath}",
+                        locationImageUrl = "${RemoteRoomsManager.API_HOST}${it.locationImagePath}",
                     )
                     is CheckRoomResult.PlayerNotInRoom -> null
                 }
@@ -68,24 +67,24 @@ object RoomsManager {
     }
 
     suspend fun ready(): Result<UnknownError, Success> = wrapExceptions {
-        Backend.ready(input = ReadyPlayerInput(playerId)).let { Success }
+        RemoteRoomsManager.ready(input = ReadyPlayerInput(playerId)).let { Success }
     }
 
     suspend fun locations(): Result<UnknownError, List<AppGameLocation>> = wrapExceptions {
-        Backend.locations().map {
+        RemoteRoomsManager.locations().map {
             AppGameLocation(
                 name = it.name,
-                imageUrl = "${Backend.API_HOST}${it.imagePath}",
+                imageUrl = "${RemoteRoomsManager.API_HOST}${it.imagePath}",
             )
         }
     }
 
     private inline fun <Data> wrapExceptions(getData: () -> Data): Result<UnknownError, Data> {
-        try {
-            return Result.Success(getData())
+        return try {
+            Result.Success(getData())
         } catch (exception: Exception) {
             exception.printStackTrace()
-            return Result.Error(UnknownError)
+            Result.Error(UnknownError)
         }
     }
 }

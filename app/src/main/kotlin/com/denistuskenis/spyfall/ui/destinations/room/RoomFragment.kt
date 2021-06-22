@@ -2,7 +2,6 @@ package com.denistuskenis.spyfall.ui.destinations.room
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment

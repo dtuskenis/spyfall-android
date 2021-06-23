@@ -14,56 +14,24 @@ object RoomsManager {
     private val playerId get() = AppActivity.PLAYER_ID_PROVIDER.playerId
 
     suspend fun search(): Result<UnknownError, List<Room>> = wrapExceptions {
-        RemoteRoomsManager.search().map {
-            Room(
-                id = it.id,
-                name = it.name,
-            )
-        }
+        RemoteRoomsManager.search().map { it.toAppRoom() }
     }
 
     suspend fun create(roomName: String): Result<UnknownError, Success> = wrapExceptions {
-        RemoteRoomsManager.create(
-            input = CreateRoomInput(
-                roomName = roomName
-            )
-        ).also {
+        RemoteRoomsManager.create(input = CreateRoomInput(roomName)).also {
             join(it)
         }.let { Success }
     }
 
     suspend fun join(roomId: String): Result<UnknownError, Boolean> = wrapExceptions {
-        RemoteRoomsManager.join(
-            input = JoinRoomInput(
-                roomId = roomId,
-                playerId = playerId,
-            )
-        ).let {
+        RemoteRoomsManager.join(input = JoinRoomInput(roomId = roomId, playerId = playerId)).let {
             it is JoinRoomResult.Success
         }
     }
 
     suspend fun check(): Result<UnknownError, RoomState?> = wrapExceptions {
         RemoteRoomsManager.check(input = CheckRoomInput(playerId))
-            .let {
-                when (it) {
-                    is CheckRoomResult.Waiting -> RoomState.Waiting(
-                        numberOfPlayers = it.numberOfPlayers,
-                        numberOfReadyPlayers = it.numberOfReadyPlayers,
-                    )
-                    is CheckRoomResult.GameStarted.AsSpy -> RoomState.GameStarted.AsSpy(
-                        cardBackImageUrl = "${RemoteRoomsManager.API_HOST}${it.cardBackImagePath}",
-                        cardFrontImageUrl = "${RemoteRoomsManager.API_HOST}${it.cardFrontImagePath}",
-                    )
-                    is CheckRoomResult.GameStarted.AsCivil -> RoomState.GameStarted.AsCivil(
-                        cardBackImageUrl = "${RemoteRoomsManager.API_HOST}${it.cardBackImagePath}",
-                        role = it.role,
-                        locationName = it.locationName,
-                        locationImageUrl = "${RemoteRoomsManager.API_HOST}${it.locationImagePath}",
-                    )
-                    is CheckRoomResult.PlayerNotInRoom -> null
-                }
-            }
+            .toRoomState(imagesApiHost = RemoteRoomsManager.API_HOST)
     }
 
     suspend fun ready(): Result<UnknownError, Success> = wrapExceptions {
@@ -72,10 +40,7 @@ object RoomsManager {
 
     suspend fun locations(): Result<UnknownError, List<AppGameLocation>> = wrapExceptions {
         RemoteRoomsManager.locations().map {
-            AppGameLocation(
-                name = it.name,
-                imageUrl = "${RemoteRoomsManager.API_HOST}${it.imagePath}",
-            )
+            it.toAppGameLocation(imagesApiHost = RemoteRoomsManager.API_HOST)
         }
     }
 

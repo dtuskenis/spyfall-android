@@ -9,7 +9,7 @@ import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import com.denistuskenis.spyfall.ui.destinations.room.CivilRole
 import com.denistuskenis.spyfall.ui.errors.handleWithDefaultErrorHandler
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import com.denistuskenis.spyfall.databinding.FragmentWaitingBinding as ViewBinding
 
@@ -21,16 +21,11 @@ class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflat
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launchWhenStarted {
-            while (true) {
-                if (isWaitingOver) {
-                    navController.popBackStack()
-                } else {
-                    handleWithDefaultErrorHandler(
-                        result = RoomsManager.check(),
-                        onSuccess = ::handleRoomState,
-                    )
-                }
-                delay(GAME_STATE_POLLING_INTERVAL_MILLISECONDS)
+            RoomsManager.check().collect {
+                handleWithDefaultErrorHandler(
+                    result = it,
+                    onSuccess = ::handleRoomState,
+                )
             }
         }
     }
@@ -48,6 +43,14 @@ class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflat
                     )
                 }
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (isWaitingOver) {
+            navController.popBackStack()
         }
     }
 
@@ -80,9 +83,5 @@ class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflat
             }
             null -> navController.popBackStack()
         }
-    }
-
-    private companion object {
-        const val GAME_STATE_POLLING_INTERVAL_MILLISECONDS = 500L
     }
 }

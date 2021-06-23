@@ -6,6 +6,9 @@ import com.denistuskenis.spyfall.domain.*
 import com.denistuskenis.spyfall.functional.Result
 import com.denistuskenis.spyfall.functional.Success
 import com.denistuskenis.spyfall.functional.UnknownError
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 import com.denistuskenis.spyfall.model.GameLocation as AppGameLocation
 
@@ -29,9 +32,14 @@ object RoomsManager {
         }
     }
 
-    suspend fun check(): Result<UnknownError, RoomState?> = wrapExceptions {
-        RemoteRoomsManager.check(input = CheckRoomInput(playerId))
-            .toRoomState(imagesApiHost = RemoteRoomsManager.API_HOST)
+    suspend fun check(): Flow<Result<UnknownError, RoomState?>> = flow {
+        while (true) {
+            emit(wrapExceptions {
+                RemoteRoomsManager.check(input = CheckRoomInput(playerId))
+                    .toRoomState(imagesApiHost = RemoteRoomsManager.API_HOST)
+            })
+            delay(CHECK_ROOM_POLLING_INTERVAL_MILLISECONDS)
+        }
     }
 
     suspend fun ready(): Result<UnknownError, Success> = wrapExceptions {
@@ -52,4 +60,6 @@ object RoomsManager {
             Result.Error(UnknownError)
         }
     }
+
+    private const val CHECK_ROOM_POLLING_INTERVAL_MILLISECONDS = 500L
 }

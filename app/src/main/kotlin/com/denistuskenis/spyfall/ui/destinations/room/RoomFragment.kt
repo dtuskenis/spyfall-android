@@ -39,7 +39,6 @@ class RoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
                 }
             }
 
-            locationsReferenceButton.isVisible = civilRole == null
             locationsReferenceButton.setOnClickListener {
                 navController.navigate(RoomFragmentDirections.toLocationsReference())
             }

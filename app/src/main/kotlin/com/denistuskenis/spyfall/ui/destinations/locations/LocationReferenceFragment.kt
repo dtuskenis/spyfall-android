@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import coil.clear
 import coil.load
 import com.denistuskenis.spyfall.R
 import com.denistuskenis.spyfall.databinding.ItemLocationBinding
 import com.denistuskenis.spyfall.model.GameLocation
 import com.denistuskenis.spyfall.model.RoomsManager
+import com.denistuskenis.spyfall.ui.adapter.ListItem
 import com.denistuskenis.spyfall.ui.adapter.ReusableListAdapter
+import com.denistuskenis.spyfall.ui.adapter.asListItems
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import com.denistuskenis.spyfall.ui.errors.handleWithDefaultErrorHandler
 import kotlinx.coroutines.launch
@@ -18,15 +21,25 @@ import com.denistuskenis.spyfall.databinding.FragmentLocationsBinding as ViewBin
 class LocationReferenceFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
 
     private val locationsAdapter = ReusableListAdapter(
-        bindData = { location: GameLocation, binding ->
+        bindData = { (_, locationItem): IndexedValue<ListItem<GameLocation>>, binding ->
             with(binding) {
-                locationNameView.text = location.name
-                locationImageView.load(location.imageUrl) {
-                    crossfade(true)
+                when (locationItem) {
+                    is ListItem.Placeholder -> {
+                        locationNameView.text = null
+                        locationImageView.clear()
+                    }
+                    is ListItem.Data -> {
+                        locationNameView.text = locationItem.location.name
+                        locationImageView.load(locationItem.location.imageUrl) {
+                            crossfade(true)
+                        }
+                    }
                 }
             }
         },
-        inflateBinding = ItemLocationBinding::inflate
+        inflateBinding = ItemLocationBinding::inflate,
+        areItemsTheSame = { a, b -> a.index == b.index },
+        areContentsTheSame = Any::equals
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,10 +54,18 @@ class LocationReferenceFragment : DestinationFragment<ViewBinding>(ViewBinding::
     override fun onStart() {
         super.onStart()
 
+        val placeholderItems = generateSequence {
+            ListItem.Placeholder
+        }.take(NUMBER_OF_PLACEHOLDER_ITEMS).withIndex().toList()
+
+        locationsAdapter.submitList(placeholderItems)
+
         lifecycleScope.launch {
             handleWithDefaultErrorHandler(
                 result = RoomsManager.locations(),
-                onSuccess = locationsAdapter::submitList,
+                onSuccess = {
+                    locationsAdapter.submitList(it.asListItems().withIndex().toList())
+                },
             )
         }
     }
@@ -59,5 +80,9 @@ class LocationReferenceFragment : DestinationFragment<ViewBinding>(ViewBinding::
                 toggleGridButton.setImageResource(R.drawable.ic_grid_on_24dp)
             }
         }
+    }
+
+    private companion object {
+        const val NUMBER_OF_PLACEHOLDER_ITEMS = 20
     }
 }

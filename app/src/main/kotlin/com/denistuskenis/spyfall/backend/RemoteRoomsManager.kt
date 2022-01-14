@@ -15,7 +15,7 @@ import kotlinx.serialization.json.Json
 
 object RemoteRoomsManager : RoomsManager {
 
-    private val json = Json { }
+    private val json = Json
 
     override suspend fun search(): List<Room> =
         get("/search").await(ListSerializer(Room.serializer()))

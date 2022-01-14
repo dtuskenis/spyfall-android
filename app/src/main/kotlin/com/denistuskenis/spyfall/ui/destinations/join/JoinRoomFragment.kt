@@ -9,6 +9,8 @@ import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.adapter.ReusableListAdapter
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import com.denistuskenis.spyfall.ui.errors.handleWithDefaultErrorHandler
+import com.denistuskenis.spyfall.ui.progress.hideBlockingProgress
+import com.denistuskenis.spyfall.ui.progress.showBlockingProgress
 import kotlinx.coroutines.launch
 import com.denistuskenis.spyfall.databinding.FragmentJoinBinding as ViewBinding
 
@@ -18,6 +20,7 @@ class JoinRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) 
         bindData = { room: Room, binding ->
             binding.roomNameView.text = room.name
             binding.root.setOnClickListener {
+                showBlockingProgress()
                 lifecycleScope.launch {
                     handleWithDefaultErrorHandler(
                         result = RoomsManager.join(room.id),
@@ -25,7 +28,7 @@ class JoinRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) 
                             navController.navigate(JoinRoomFragmentDirections.toWaitingRoom())
                         }
                     )
-                }
+                }.invokeOnCompletion { hideBlockingProgress() }
             }
         },
         inflateBinding = ItemRoomBinding::inflate

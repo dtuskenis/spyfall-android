@@ -83,5 +83,5 @@ object RemoteRoomsManager {
             .let { (_, _, result) -> result.get() }
     }
 
-    const val API_HOST = "https://api-spyfall.herokuapp.com"
+    const val API_HOST = "https://spyfall-backend-2mts.onrender.com"
 }

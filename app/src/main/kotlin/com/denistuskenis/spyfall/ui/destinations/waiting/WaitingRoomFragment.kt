@@ -9,13 +9,10 @@ import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import com.denistuskenis.spyfall.ui.destinations.room.CivilRole
 import com.denistuskenis.spyfall.ui.errors.handleWithDefaultErrorHandler
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import com.denistuskenis.spyfall.databinding.FragmentWaitingBinding as ViewBinding
 
 class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
-
-    private var isWaitingOver = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +43,6 @@ class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflat
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        if (isWaitingOver) {
-            navController.popBackStack()
-        }
-    }
-
     private fun handleRoomState(roomState: RoomState?) {
         when (roomState) {
             is RoomState.Waiting -> {
@@ -64,7 +53,6 @@ class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflat
                 )
             }
             is RoomState.GameStarted -> {
-                isWaitingOver = true
                 navController.navigate(
                     WaitingRoomFragmentDirections.toRoom(
                         civilRole = (roomState as? RoomState.GameStarted.AsCivil)?.let {

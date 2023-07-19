@@ -3,6 +3,7 @@ package com.denistuskenis.spyfall.model
 import com.denistuskenis.spyfall.AppActivity
 import com.denistuskenis.spyfall.domain.CheckRoomInput
 import com.denistuskenis.spyfall.domain.CreateRoomInput
+import com.denistuskenis.spyfall.domain.FindRoomInput
 import com.denistuskenis.spyfall.domain.JoinRoomInput
 import com.denistuskenis.spyfall.domain.JoinRoomResult
 import com.denistuskenis.spyfall.domain.ReadyPlayerInput
@@ -25,6 +26,11 @@ object RoomsManager {
     suspend fun search(): Result<UnknownError, List<Room>> =
         RemoteRoomsManager.search()
             .toResult { rooms -> rooms.map { it.toAppRoom() } }
+
+    suspend fun find(): Result<UnknownError, Success> =
+        RemoteRoomsManager.find(input = FindRoomInput(playerId = playerId))
+            .toResult { it }
+            .mapSuccess { Success }
 
     suspend fun create(roomName: String): Result<UnknownError, Success> =
         RemoteRoomsManager.create(input = CreateRoomInput(roomName))

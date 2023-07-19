@@ -3,6 +3,8 @@ package com.denistuskenis.spyfall.remote
 import com.denistuskenis.spyfall.domain.CheckRoomInput
 import com.denistuskenis.spyfall.domain.CheckRoomResult
 import com.denistuskenis.spyfall.domain.CreateRoomInput
+import com.denistuskenis.spyfall.domain.FindRoomInput
+import com.denistuskenis.spyfall.domain.FindRoomResult
 import com.denistuskenis.spyfall.domain.GameLocation
 import com.denistuskenis.spyfall.domain.JoinRoomInput
 import com.denistuskenis.spyfall.domain.JoinRoomResult
@@ -27,6 +29,9 @@ object RemoteRoomsManager {
 
     suspend fun search(): RemoteResult<List<Room>> =
         catchFuelError { FuelRoomsManager.search() }
+
+    suspend fun find(input: FindRoomInput): RemoteResult<FindRoomResult> =
+        catchFuelError { FuelRoomsManager.find(input) }
 
     suspend fun create(input: CreateRoomInput): RemoteResult<RoomId> =
         catchFuelError { FuelRoomsManager.create(input) }
@@ -54,6 +59,9 @@ object RemoteRoomsManager {
 
         override suspend fun search(): List<Room> =
             get("/search").await(ListSerializer(Room.serializer()))
+
+        override suspend fun find(input: FindRoomInput): FindRoomResult =
+            post("/find", input).await(FindRoomResult.serializer())
 
         override suspend fun create(input: CreateRoomInput): RoomId =
             post("/create", input).await(RoomId.serializer())

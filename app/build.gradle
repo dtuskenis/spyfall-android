@@ -74,5 +74,5 @@ dependencies {
     implementation "com.wajahatkarim:EasyFlipView:3.0.3"
     implementation "io.coil-kt:coil:1.2.2"
 
-    implementation "com.github.dtuskenis:spyfall-contract:0.1.0"
+    implementation "com.github.dtuskenis:spyfall-contract:0.1.1"
 }

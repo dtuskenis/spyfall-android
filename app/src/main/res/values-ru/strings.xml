@@ -11,6 +11,7 @@
     <string name="default_error_dialog_title">Что-то пошло не так</string>
 
     <string name="home_screen_create_room_button_title">Создать Комнату</string>
+    <string name="home_screen_find_room_button_title">Найти комнату</string>
     <string name="home_screen_game_rules_button_title">Правила Игры</string>
     <string name="home_screen_join_room_button_title">Войти в Комнату</string>
     <string name="home_screen_locations_reference_button">Игровые Локации</string>

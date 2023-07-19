@@ -2,14 +2,10 @@ package com.denistuskenis.spyfall.ui.destinations.create
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.lifecycleScope
 import com.denistuskenis.spyfall.R
 import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
-import com.denistuskenis.spyfall.ui.errors.handleWithDefaultErrorHandler
-import com.denistuskenis.spyfall.ui.progress.hideBlockingProgress
-import com.denistuskenis.spyfall.ui.progress.showBlockingProgress
-import kotlinx.coroutines.launch
+import com.denistuskenis.spyfall.ui.operations.performBlockingOperationWithDefaultErrorHandler
 import com.denistuskenis.spyfall.databinding.FragmentCreateBinding as ViewBinding
 
 class CreateRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
@@ -20,15 +16,12 @@ class CreateRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate
         with(binding) {
             createButton.setOnClickListener {
                 validateRoomName { roomName ->
-                    showBlockingProgress()
-                    lifecycleScope.launch {
-                        handleWithDefaultErrorHandler(
-                            result = RoomsManager.create(roomName = roomName),
-                            onSuccess = {
-                                navController.navigate(CreateRoomFragmentDirections.toWaitingRoom())
-                            }
-                        )
-                    }.invokeOnCompletion { hideBlockingProgress() }
+                    performBlockingOperationWithDefaultErrorHandler(
+                        getResult = { RoomsManager.create(roomName = roomName) },
+                        onSuccess = {
+                            navController.navigate(CreateRoomFragmentDirections.toWaitingRoom())
+                        },
+                    )
                 }
             }
         }

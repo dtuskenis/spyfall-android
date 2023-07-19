@@ -2,13 +2,9 @@ package com.denistuskenis.spyfall.ui.destinations.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.lifecycleScope
 import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
-import com.denistuskenis.spyfall.ui.errors.handleWithDefaultErrorHandler
-import com.denistuskenis.spyfall.ui.progress.hideBlockingProgress
-import com.denistuskenis.spyfall.ui.progress.showBlockingProgress
-import kotlinx.coroutines.launch
+import com.denistuskenis.spyfall.ui.operations.performBlockingOperationWithDefaultErrorHandler
 import com.denistuskenis.spyfall.databinding.FragmentHomeBinding as ViewBinding
 
 class HomeFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
@@ -18,15 +14,12 @@ class HomeFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
 
         with(binding) {
             findRoomButton.setOnClickListener {
-                showBlockingProgress()
-                lifecycleScope.launch {
-                    handleWithDefaultErrorHandler(
-                        result = RoomsManager.find(),
-                        onSuccess = {
-                            navController.navigate(HomeFragmentDirections.toWaitingRoom())
-                        },
-                    )
-                }.invokeOnCompletion { hideBlockingProgress() }
+                performBlockingOperationWithDefaultErrorHandler(
+                    getResult = RoomsManager::find,
+                    onSuccess = {
+                        navController.navigate(HomeFragmentDirections.toWaitingRoom())
+                    },
+                )
             }
             createRoomButton.setOnClickListener {
                 navController.navigate(HomeFragmentDirections.toCreateRoom())

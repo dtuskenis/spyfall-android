@@ -13,7 +13,7 @@ class HomeFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            findRoomButton.setOnClickListener {
+            findGameButton.setOnClickListener {
                 performBlockingOperationWithDefaultErrorHandler(
                     getResult = RoomsManager::find,
                     onSuccess = {
@@ -21,11 +21,8 @@ class HomeFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
                     },
                 )
             }
-            createRoomButton.setOnClickListener {
-                navController.navigate(HomeFragmentDirections.toCreateRoom())
-            }
-            joinRoomButton.setOnClickListener {
-                navController.navigate(HomeFragmentDirections.toJoinRoom())
+            customGameButton.setOnClickListener {
+                navController.navigate(HomeFragmentDirections.toCustomGame())
             }
             locationsReferenceButton.setOnClickListener {
                 navController.navigate(HomeFragmentDirections.toLocationsReference())

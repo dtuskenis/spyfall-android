@@ -1,22 +1,21 @@
 <resources>
     <string name="app_name">Находка для шпиона</string>
 
-    <string name="create_room_screen_create_button_title">Создать</string>
-    <string name="create_room_screen_empty_room_name_error">Название комнаты должно быть непустым</string>
-    <string name="create_room_screen_room_name_hint">Название комнаты</string>
-    <string name="create_room_screen_title">Создать Комнату</string>
+    <string name="custom_game_screen_create_button_title">Создать</string>
+    <string name="custom_game_screen_create_title">Создать Комнату</string>
+    <string name="custom_game_screen_empty_room_name_error">Название комнаты должно быть непустым</string>
+    <string name="custom_game_screen_join_title">Войти в Комнату</string>
+    <string name="custom_game_screen_room_name_hint">Название комнаты</string>
+    <string name="custom_game_screen_title">Своя Игра</string>
 
     <string name="default_error_dialog_button">ОК</string>
     <string name="default_error_dialog_message">Проверьте соединение с сетью или попробуйте снова.</string>
     <string name="default_error_dialog_title">Что-то пошло не так</string>
 
-    <string name="home_screen_create_room_button_title">Создать Комнату</string>
-    <string name="home_screen_find_room_button_title">Найти комнату</string>
+    <string name="home_screen_custom_game_button_title">Своя Игра</string>
+    <string name="home_screen_find_game_button_title">Найти Игру</string>
     <string name="home_screen_game_rules_button_title">Правила Игры</string>
-    <string name="home_screen_join_room_button_title">Войти в Комнату</string>
     <string name="home_screen_locations_reference_button">Игровые Локации</string>
-
-    <string name="join_room_screen_title">Войти в Комнату</string>
 
     <string name="locations_reference_screen_title">Игровые Локации</string>
 

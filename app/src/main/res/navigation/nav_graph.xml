@@ -23,17 +23,8 @@
             />
 
         <action
-            android:id="@+id/to_join_room"
-            app:destination="@id/destination_join_room"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out"
-            />
-
-        <action
-            android:id="@+id/to_create_room"
-            app:destination="@id/destination_create_room"
+            android:id="@+id/to_custom_game"
+            app:destination="@id/destination_custom_game"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
@@ -57,27 +48,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/destination_create_room"
-        android:name="com.denistuskenis.spyfall.ui.destinations.create.CreateRoomFragment"
-        tools:layout="@layout/fragment_create"
+        android:id="@+id/destination_custom_game"
+        android:name="com.denistuskenis.spyfall.ui.destinations.create.CustomGameFragment"
+        tools:layout="@layout/fragment_custom_game"
         >
-        <action
-            android:id="@+id/to_waiting_room"
-            app:destination="@id/destination_waiting_room"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out"
-            />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/destination_join_room"
-        android:name="com.denistuskenis.spyfall.ui.destinations.join.JoinRoomFragment"
-        tools:layout="@layout/fragment_join"
-        >
-
         <action
             android:id="@+id/to_waiting_room"
             app:destination="@id/destination_waiting_room"

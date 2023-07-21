@@ -1,22 +1,21 @@
 <resources>
     <string name="app_name">Spyfall</string>
 
-    <string name="create_room_screen_create_button_title">Create</string>
-    <string name="create_room_screen_empty_room_name_error">Room name should be non-empty</string>
-    <string name="create_room_screen_room_name_hint">Name for a room</string>
-    <string name="create_room_screen_title">Create Room</string>
+    <string name="custom_game_screen_create_button_title">Create</string>
+    <string name="custom_game_screen_create_title">Create Room</string>
+    <string name="custom_game_screen_empty_room_name_error">Room name should be non-empty</string>
+    <string name="custom_game_screen_join_title">Join Room</string>
+    <string name="custom_game_screen_room_name_hint">Name for a room</string>
+    <string name="custom_game_screen_title">Custom Game</string>
 
     <string name="default_error_dialog_button">OK</string>
     <string name="default_error_dialog_message">Please check your network connection or try again later.</string>
     <string name="default_error_dialog_title">Something went wrong</string>
 
-    <string name="home_screen_create_room_button_title">Create Room</string>
-    <string name="home_screen_find_room_button_title">Find Room</string>
+    <string name="home_screen_custom_game_button_title">Custom Game</string>
+    <string name="home_screen_find_game_button_title">Find Game</string>
     <string name="home_screen_game_rules_button_title">Game Rules</string>
-    <string name="home_screen_join_room_button_title">Join Room</string>
     <string name="home_screen_locations_reference_button">Locations Reference</string>
-
-    <string name="join_room_screen_title">Join Room</string>
 
     <string name="locations_reference_screen_title">Locations Reference</string>
 

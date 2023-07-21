@@ -1,16 +1,17 @@
-package com.denistuskenis.spyfall.ui.destinations.join
+package com.denistuskenis.spyfall.ui.destinations.create
 
 import android.os.Bundle
 import android.view.View
+import com.denistuskenis.spyfall.R
 import com.denistuskenis.spyfall.databinding.ItemRoomBinding
 import com.denistuskenis.spyfall.model.Room
 import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.adapter.ReusableListAdapter
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import com.denistuskenis.spyfall.ui.operations.performBlockingOperationWithDefaultErrorHandler
-import com.denistuskenis.spyfall.databinding.FragmentJoinBinding as ViewBinding
+import com.denistuskenis.spyfall.databinding.FragmentCustomGameBinding as ViewBinding
 
-class JoinRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
+class CustomGameFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
 
     private val roomsAdapter = ReusableListAdapter(
         bindData = { room: Room, binding ->
@@ -19,7 +20,7 @@ class JoinRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) 
                 performBlockingOperationWithDefaultErrorHandler(
                     getResult = { RoomsManager.join(room.id) },
                     onSuccess = {
-                        navController.navigate(JoinRoomFragmentDirections.toWaitingRoom())
+                        navController.navigate(CustomGameFragmentDirections.toWaitingRoom())
                     },
                 )
             }
@@ -31,6 +32,16 @@ class JoinRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) 
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+            createButton.setOnClickListener {
+                validateRoomName { roomName ->
+                    performBlockingOperationWithDefaultErrorHandler(
+                        getResult = { RoomsManager.create(roomName = roomName) },
+                        onSuccess = {
+                            navController.navigate(CustomGameFragmentDirections.toWaitingRoom())
+                        },
+                    )
+                }
+            }
             refreshButton.setOnClickListener { refresh() }
             roomsView.adapter = roomsAdapter
         }
@@ -40,6 +51,16 @@ class JoinRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) 
         super.onStart()
 
         refresh()
+    }
+
+    private fun validateRoomName(onSuccess: (roomName: String) -> Unit) {
+        val roomNameView = binding.roomNameView
+        val roomName = roomNameView.text?.toString().orEmpty()
+        when {
+            roomName.isEmpty() || roomName.isBlank() ->
+                roomNameView.error = getString(R.string.custom_game_screen_empty_room_name_error)
+            else -> onSuccess(roomName)
+        }
     }
 
     private fun refresh() {

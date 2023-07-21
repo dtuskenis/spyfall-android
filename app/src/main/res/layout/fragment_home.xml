@@ -12,30 +12,20 @@
     >
 
     <Button
-        android:id="@+id/find_room_button"
+        android:id="@+id/find_game_button"
         android:layout_width="@dimen/default_button_width"
         android:layout_height="wrap_content"
-        android:text="@string/home_screen_find_room_button_title"
-        app:layout_constraintBottom_toTopOf="@id/create_room_button"
+        android:text="@string/home_screen_find_game_button_title"
+        app:layout_constraintBottom_toTopOf="@id/custom_game_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
 
     <Button
-        android:id="@+id/create_room_button"
+        android:id="@+id/custom_game_button"
         android:layout_width="@dimen/default_button_width"
         android:layout_height="wrap_content"
-        android:text="@string/home_screen_create_room_button_title"
-        app:layout_constraintBottom_toTopOf="@id/join_room_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <Button
-        android:id="@+id/join_room_button"
-        android:layout_width="@dimen/default_button_width"
-        android:layout_height="wrap_content"
-        android:text="@string/home_screen_join_room_button_title"
+        android:text="@string/home_screen_custom_game_button_title"
         app:layout_constraintBottom_toTopOf="@id/locations_reference_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

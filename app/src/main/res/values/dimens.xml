@@ -4,8 +4,7 @@
     <dimen name="margin_tiny">4dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
 
-    <dimen name="create_room_screen_room_name_top_margin">100dp</dimen>
-    <dimen name="create_room_screen_room_name_view_width">@dimen/default_button_width</dimen>
+    <dimen name="custom_game_screen_room_name_view_width">@dimen/default_button_width</dimen>
 
     <dimen name="room_screen_card_corner_radius">12dp</dimen>
     <dimen name="room_screen_card_elevation">0dp</dimen>

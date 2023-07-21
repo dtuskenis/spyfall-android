@@ -1,7 +1,9 @@
 package com.denistuskenis.spyfall.ui.destinations.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.denistuskenis.spyfall.R
 import com.denistuskenis.spyfall.model.RoomsManager
 import com.denistuskenis.spyfall.ui.destinations.DestinationFragment
 import com.denistuskenis.spyfall.ui.operations.performBlockingOperationWithDefaultErrorHandler
@@ -29,6 +31,14 @@ class HomeFragment : DestinationFragment<ViewBinding>(ViewBinding::inflate) {
             }
             gameRulesButton.setOnClickListener {
                 navController.navigate(HomeFragmentDirections.toGameRules())
+            }
+            shareButton.setOnClickListener {
+                with(Intent()) {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, getString(R.string.app_sharing_link))
+                    type = "text/plain"
+                    startActivity(Intent.createChooser(this, ""))
+                }
             }
         }
     }

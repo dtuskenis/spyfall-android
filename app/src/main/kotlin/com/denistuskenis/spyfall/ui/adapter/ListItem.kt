@@ -2,7 +2,7 @@ package com.denistuskenis.spyfall.ui.adapter
 
 sealed class ListItem<out T : Any> {
 
-    object Placeholder : ListItem<Nothing>()
+    data object Placeholder : ListItem<Nothing>()
 
     data class Data<T : Any>(val location: T) : ListItem<T>()
 }

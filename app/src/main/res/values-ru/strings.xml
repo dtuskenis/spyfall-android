@@ -22,7 +22,7 @@
     <string name="room_screen_card_hint">Нажмите на карту, чтобы узнать свою роль и/или локацию.\nВы можете нажать на карту снова, чтобы ее перевернуть</string>
     <string name="room_screen_loading_card_title">Загрузка карты…</string>
 
-    <string name="waiting_room_screen_players_readiness_format">%1d из %2d готовы</string>
+    <string name="waiting_room_screen_players_readiness_format">%1$d из %2$d готовы</string>
     <string name="waiting_room_screen_ready_button_title">Подтвердить готовность</string>
     <string name="waiting_room_screen_title">Ожидание готовности всех игроков</string>
 </resources>

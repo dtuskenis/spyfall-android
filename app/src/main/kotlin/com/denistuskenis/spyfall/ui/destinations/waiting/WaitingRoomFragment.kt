@@ -2,7 +2,9 @@ package com.denistuskenis.spyfall.ui.destinations.waiting
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.denistuskenis.spyfall.R
 import com.denistuskenis.spyfall.model.RoomState
 import com.denistuskenis.spyfall.model.RoomsManager
@@ -17,12 +19,14 @@ class WaitingRoomFragment : DestinationFragment<ViewBinding>(ViewBinding::inflat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launchWhenStarted {
-            RoomsManager.check().collect {
-                handleWithDefaultErrorHandler(
-                    result = it,
-                    onSuccess = ::handleRoomState,
-                )
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                RoomsManager.check().collect {
+                    handleWithDefaultErrorHandler(
+                        result = it,
+                        onSuccess = ::handleRoomState,
+                    )
+                }
             }
         }
     }

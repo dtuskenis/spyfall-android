@@ -22,7 +22,7 @@
     <string name="room_screen_card_hint">Tap on card to reveal your role and/or location.\nYou can tap it again to flip it\'s sides</string>
     <string name="room_screen_loading_card_title">Loading card…</string>
 
-    <string name="waiting_room_screen_players_readiness_format">%1d of %2d ready</string>
+    <string name="waiting_room_screen_players_readiness_format">%1$d of %2$d ready</string>
     <string name="waiting_room_screen_ready_button_title">Ready</string>
     <string name="waiting_room_screen_title">Waiting for players to be ready</string>
 </resources>
